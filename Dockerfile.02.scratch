@@ -1,0 +1,11 @@
+FROM golang:1.22.7-alpine AS builder
+COPY go.mod .
+COPY main.go .
+RUN go build 
+
+FROM scratch
+# You can use distroless too
+COPY --from=builder /go/hello .
+CMD ["./hello"]
+
+# docker build --file ./Dockerfile.02.scratch -t hello-go:02.scratch.img .

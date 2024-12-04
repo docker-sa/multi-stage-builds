@@ -1,0 +1,12 @@
+FROM golang:1.22.7-alpine AS builder
+COPY go.mod .
+COPY main.go .
+RUN go build
+
+FROM ubuntu:24.04
+# The WORKDIR in golang is /go, 
+COPY --from=builder /go/hello .
+CMD ["./hello"]
+
+
+# docker build --file ./Dockerfile.01.ubuntu -t hello-go:01.ubuntu.img .

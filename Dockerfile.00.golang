@@ -1,0 +1,8 @@
+FROM golang:1.22.7-alpine
+COPY go.mod .
+COPY main.go .
+# it will produce a hello binary
+RUN go build 
+CMD ["./hello"]
+
+# docker build --file ./Dockerfile.00.golang -t hello-go:00.golang.img .
